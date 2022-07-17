@@ -8,6 +8,7 @@
     "package.json": "^2.0.1",
     "path": "^0.12.7",
     "request": "^2.88.2",
+    "serve-favicon": "^2.5.0",
     "winston": "^3.8.1"
   }
 }

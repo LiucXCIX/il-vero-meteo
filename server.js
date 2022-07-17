@@ -3,6 +3,7 @@ const expressWinston = require('express-winston');
 const winston = require('winston');
 const path = require('path');
 const axios = require('axios');
+const favicon = require('serve-favicon');
 
 require("dotenv").config();
 
@@ -10,6 +11,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 const weather_api_key = process.env.WEATHER_API_KEY
 
+app.use(favicon(path.join(__dirname, 'assets', 'img', 'Favicon', 'il-vero-meteo.ico')));
 app.use(express.static(__dirname + '/assets'));
 
 app.use(expressWinston.logger({
@@ -47,7 +49,6 @@ app.get('/city_info/:city_name', function (req, res) {
     let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}`;
     axios.get(fullUrl)
     .then(json => {
-        console.log(json.data)
         res.json(json.data)
     })
     .catch(error => {
@@ -59,7 +60,6 @@ app.get('/weather_info', function (req, res) {
     let fullUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&appid=${weather_api_key}&units=metric`;
     axios.get(fullUrl)
     .then(json => {
-        console.log(json.data)
         res.json(json.data)
     })
     .catch(error => {
@@ -79,15 +79,3 @@ app.use(expressWinston.errorLogger({
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
-
-/*
-    let response = await fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + req.params.city_name + "&appid=" + weather_api_key,{method:"GET"});
-    let infoCity = await response.json();
-
-    let lat = infoCity[0].lat; 
-    let lon = infoCity[0].lon;
-    response = await fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + weather_api_key + "&units=metric",{method:"GET"});
-    let weatherInfo = await response.json();
-    response = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}`,{method:"GET"});
-    let sunriseInfo = await response.json();
-*/
