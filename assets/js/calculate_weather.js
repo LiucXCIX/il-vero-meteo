@@ -70,4 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("weather-all").addEventListener('click', async () => {
         await setWeatherForAllCities();
     });
+    (async () => {await setWeatherForAllCities()})()
+    window.setInterval(async () => {await setWeatherForAllCities()}, (1000 * 120))
 });
+
