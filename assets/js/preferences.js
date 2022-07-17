@@ -29,7 +29,6 @@ function switchDarkMode() {
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
-    //console.log("La pagina è stata caricata e tutto va discretamente bene");
     let previousSettingsJson = localStorage.getItem("settingsilverometeo.it");
     let previousSettings = null;
     if (previousSettingsJson != null) {
