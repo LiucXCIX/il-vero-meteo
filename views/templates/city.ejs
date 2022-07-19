@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il vero meteo - La tua città</title>
+    <title>Il vero meteo - <%=city_name%></title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
     <link href="/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/weather-icons.css" rel="stylesheet">
@@ -17,7 +17,7 @@
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin=""></script>
-    <script defer src ="/js/handle_city_page.js"></script>
+    <script defer src ="/js/handle_city_teamplate.js"></script>
     <script defer src ="/js/preferences.js"></script>
     <script defer src = "/js/search.js"></script>
 </head>
@@ -35,7 +35,7 @@
                   <a class="nav-link" href="/index">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" id = "your-city" aria-current="page">La tua città</a>
+                  <a class="nav-link active" id = "your-city" aria-current="page"><%=city_name%></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/cities">Tutte le nostre città</a>
@@ -65,7 +65,7 @@
               <div class="d-flex align-items-end row">
                 <div class="mb-2 col-sm-7">
                   <div class="card-body">
-                    <h5 class="card-title text-primary mb-4"><span id ="city-name"> </span> (<span id = "country"> </span>) <span id = "weather-info"> </span><i class = "wi" id = "weather-icon"></i>  alle <span id ="time"> </span></h5>
+                    <h5 class="card-title text-primary mb-4"><span id ="city-name"><%=city_name%></span> (<span id = "country"> </span>) <span id = "weather-info"> </span><i class = "wi" id = "weather-icon"></i>  alle <span id ="time"> </span></h5>
                     <p class="mb-2"> Temperatura: <span id ="temp"> </span> °C
                     </p>
                     <p class="mb-2"> Temperatura percepita: <span id ="actual-temp"> </span> °C
@@ -114,7 +114,7 @@
             </div>
           </div>
         </div>
-        <div class = "row">
+        <div class = "row mb-2">
           <div class = "mb-2 order-0">
             <div class = "card rounded_elem">
               <div id="map"> </div>

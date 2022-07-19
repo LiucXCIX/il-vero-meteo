@@ -1,9 +1,15 @@
 
 var citiesName = []; // this array contains the name of every city that we can currently display the weather of
 
+
+/**
+ * When the user clicks on a city, the page will redirect to the city page.
+ * @param cityName - The name of the city you want to get the page for.
+ */
 function getCityPage(cityName) {
     window.location.href = `/city/${cityName}`
 }
+
 
 /**
  * It fetches the weather data from the OpenWeatherMap API and returns the JSON object
@@ -11,7 +17,7 @@ function getCityPage(cityName) {
  * @param lon - longitude
  * @returns The weather data for the current location.
  */
-async function getWeather(lat, lon) {
+ async function getWeather(lat, lon) {
     let response = await fetch(`/weather_info/?lat=${lat}&lon=${lon}`,{method:"GET"});
     let jsonObj = await response.json();
     return jsonObj;
@@ -50,11 +56,24 @@ async function setWeatherCity(cityName){
 /**
  * For each city name in the citiesName array, gets the weather of that specific city and then display it
  * on the page
- */
+
 async function setWeatherForAllCities(){
     for (let cityName of citiesName) {
-        await setWeatherCity(cityName)
+        await setWeatherCity(cityName) // richieste sequenziali!
     }
+}
+*/
+
+/**
+ * For each city name in the citiesName array, gets the weather of that specific city and then display it
+ * on the page
+ */
+ async function setWeatherForAllCities(){
+    arrayCall = []
+    for (let cityName of citiesName) {
+        arrayCall.push(setWeatherCity(cityName))
+    }
+    await Promise.all(arrayCall) // in tal modo le richieste verranno eseguite come concorrenziali
 }
 
 

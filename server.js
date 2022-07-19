@@ -10,9 +10,12 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 8080;
 const weather_api_key = process.env.WEATHER_API_KEY
+const unsplash_access_key = process.env.UNSPLASH_ACCESS_KEY
+
 
 app.use(favicon(path.join(__dirname, 'assets', 'img', 'Favicon', 'il-vero-meteo.ico')));
 app.use(express.static(__dirname + '/assets'));
+app.set("view engine", "ejs");
 
 app.use(expressWinston.logger({
     transports: [
@@ -38,7 +41,9 @@ app.get('/city', function (req, res) {
 
 app.get('/city/:city_name', function (req, res) {
     console.log(req.params.city_name, __dirname)
-    res.sendFile(path.join(__dirname, '/views/city.html'));
+    res.render("templates/city", {
+        city_name: req.params.city_name.charAt(0).toUpperCase() + req.params.city_name.slice(1),
+    })
 });
 
 app.get('/cities', function (req, res) {
@@ -54,6 +59,12 @@ app.get('/city_info/:city_name', function (req, res) {
     .catch(error => {
         return res.status(500).json(error);
     })
+});
+
+app.get('/city_photo/:city_name', function (req, res) {
+    let fullUrl = `https://api.unsplash.com/photos/random/?client_id=${unsplash_access_key}&query=${req.params.city_name}`;
+    const request = require('request')
+    request(fullUrl).pipe(res);
 });
 
 app.get('/weather_info', function (req, res) {
