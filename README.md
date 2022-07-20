@@ -4,7 +4,6 @@ Nessuno potrà eguagliarci.
 Stay tuned.
 
 P.s. nope, sto solo scherzando, in realtà è solo il repository per un assignment universitario, mi dispiace per la fake news
----
 
 ### Corso di Programmazione web e mobile
 ### Anno accademico 2022
