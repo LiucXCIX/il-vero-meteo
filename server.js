@@ -51,7 +51,7 @@ app.get('/cities', function (req, res) {
 });
 
 app.get('/city_info/:city_name', function (req, res) {
-    let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}`;
+    let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}&orientation=landscape`;
     axios.get(fullUrl)
     .then(json => {
         res.json(json.data)

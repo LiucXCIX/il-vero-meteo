@@ -53,7 +53,7 @@ function handleMap(lat, lon, cityName, countryName, weatherDescription, weatherI
         let weatherCity = await getWeather(e.latlng.lat, e.latlng.lng);
  	    L.popup()
  	    	.setLatLng(e.latlng)
- 	    	.setContent(`<b class = "text-primary">${weatherCity.name} (${weatherCity.sys.country})</b><span> ${weatherCity.weather[0].description} <i class = "wi wi-owm-${weatherCity.weather[0].id}"> </i> ${weatherCity.main.feels_like}°C</span>`)
+            .setContent(`<a class = "link-primary" href = "/city/${weatherCity.name}">${weatherCity.name} (${weatherCity.sys.country})</a><span> ${weatherCity.weather[0].description} <i class = "wi wi-owm-${weatherCity.weather[0].id}"> </i> ${weatherCity.main.feels_like}°C</span><br>`)
  	    	.openOn(map);
     }
     map.on('click', async function(event) {onMapClick(event)});
@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         alert(`Non è stato possibile ottenere il meteo per la città chiamata ${cityName}, verrai quindi riportato sulla homepage`)
         window.location.href = `/`
     }
+    // get l'array in localstorge se è undefined inseriscine uno nuovo, se no vai a appendere il cityName nuovo alla lista
+    localStorage.setItem("ilverometeoRequestedCities", )
     let weatherCity = await getWeather(position[0].lat, position[0].lon);
     document.getElementById("country").innerText = weatherCity.sys.country
     document.getElementById("time").innerText = toHHMMSS(weatherCity.dt + weatherCity.timezone)

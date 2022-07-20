@@ -41,8 +41,7 @@ function handleMap(cityName, countryName, weatherDescription, weatherIconId, tem
         let weatherCity = await getWeather(e.latlng.lat, e.latlng.lng);
  	    L.popup()
  	    	.setLatLng(e.latlng)
- 	    	.setContent(`<b class = "text-primary">${weatherCity.name} (${weatherCity.sys.country})</b><span> ${weatherCity.weather[0].description} <i class = "wi wi-owm-${weatherCity.weather[0].id}"> </i> ${weatherCity.main.feels_like}°C</span><br>
-             <a role="button" type="button" class="btn btn-sm btn-outline-primary" href = "/city/${weatherCity.name}">Che tempo fa?</a>`)
+ 	    	.setContent(`<a class = "link-primary" href = "/city/${weatherCity.name}">${weatherCity.name} (${weatherCity.sys.country})</a><span> ${weatherCity.weather[0].description} <i class = "wi wi-owm-${weatherCity.weather[0].id}"> </i> ${weatherCity.main.feels_like}°C</span><br>`)
  	    	.openOn(map);
     }
     map.on('click', async function(event) {onMapClick(event)});
