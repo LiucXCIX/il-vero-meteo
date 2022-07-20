@@ -51,7 +51,7 @@ app.get('/cities', function (req, res) {
 });
 
 app.get('/city_info/:city_name', function (req, res) {
-    let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}&orientation=landscape`;
+    let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}`;
     axios.get(fullUrl)
     .then(json => {
         res.json(json.data)
@@ -62,7 +62,7 @@ app.get('/city_info/:city_name', function (req, res) {
 });
 
 app.get('/city_photo/:city_name', function (req, res) {
-    let fullUrl = `https://api.unsplash.com/photos/random/?client_id=${unsplash_access_key}&query=${req.params.city_name}`;
+    let fullUrl = `https://api.unsplash.com/photos/random/?client_id=${unsplash_access_key}&query=${req.params.city_name}&orientation=landscape`;
     const request = require('request')
     request(fullUrl).pipe(res);
 });
