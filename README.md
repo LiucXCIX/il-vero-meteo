@@ -5,10 +5,6 @@ Stay tuned.
 
 P.s. nope, sto solo scherzando, in realtà è solo il repository per un assignment universitario, mi dispiace per la fake news
 
-### Corso di Programmazione web e mobile
-### Anno accademico 2022
-
-
 ### 1. Introduzione
 
 ilverometeo.it è un applicazione web che fornisce informazioni relative al meteo nella propria località o alternativamente in ogni città che l’utente possa richiedere.
@@ -89,7 +85,7 @@ Inoltre le altre risorse saranno accessibili attraverso transazioni GET eseguite
 
 Questo codice viene utilizzato all’interno del server per reindirizzare le chiamate che faremo dal web server al API di Openweathermap in modo tale da nascondere le chiavi del API dal utente (le quali verranno estratte da un file dotenv):
 
-'weather_api_key = process.env.WEATHER_API_KEY
+`weather_api_key = process.env.WEATHER_API_KEY
 […]
 app.get('/weather_info', function (req, res) {
     let fullUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${req.query.lat}&lon=${req.query.lon}&appid=${weather_api_key}&units=metric`;
@@ -101,7 +97,7 @@ app.get('/weather_info', function (req, res) {
         return res.status(500).json(error);
     })
 });
-'
+`
 
 #### 4.2 		Javascript
 
@@ -124,7 +120,6 @@ Questo codice invece verrà utilizzato per gestire tramite un webworker le chiam
         ImageLoaderWorker.postMessage(imageURL)
     })
 }`
-Codice in ‘handle_city_page.js’
 
 
 `self.addEventListener('message', async event => {
@@ -138,7 +133,6 @@ Codice in ‘handle_city_page.js’
       res: jsonObj
     })
   })`
-Codice in ‘image_worker.js’
 
 
 Il primo codice verrà utilizzato per inizializzare il web worker, il secondo per implementarne la logica.
