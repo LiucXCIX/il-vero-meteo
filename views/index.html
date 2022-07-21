@@ -27,9 +27,9 @@
         }
       }
     </style>
+    <script defer src ="/js/preferences.js"></script>
     <link href="/css/carousel.css" rel="stylesheet">
     <link href="/css/mycss.css" rel="stylesheet">
-    <script defer src ="/js/preferences.js"></script>
     <script defer src = "/js/search.js"></script>
   </head>
 
@@ -47,10 +47,13 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id = "your-city">La tua città</a>
+            <a class="nav-link your-city">La tua città</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/cities">Tutte le tue città</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link map">La mappa</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" class="btn btn-info" role="button" id = "turnOnOffDarkMode">Dark mode</a>
@@ -93,7 +96,7 @@
           <div class="carousel-caption">
             <h1>Utilizza la mappa per trovare posti nuovi</h1>
             <p>E poi non scordarti di cliccare su di essa per ottenere le previsioni!</p>
-            <p><a class="btn btn-lg btn-primary" href="/map">Vediamo la mappa!</a></p>
+            <p><a class="btn btn-lg btn-primary map">Vediamo la mappa!</a></p>
           </div>
         </div>
       </div>
@@ -104,7 +107,7 @@
           <div class="carousel-caption text-end">
             <h1>Qua potrai vedere la località dove ti trovi</h1>
             <p>Speriamo che l'immagine di sfondo non sia un cattivo presagio. Aiuto.</p>
-            <p><a class="btn btn-lg btn-primary" href="/city">Controlliamo il tempo nella mia città!</a></p>
+            <p><a class="btn btn-lg btn-primary your-city">Controlliamo il tempo nella mia città!</a></p>
           </div>
         </div>
       </div>
@@ -125,7 +128,7 @@
         <img class="rounded-circle" width="140" height="140" src="img/Homepage/milano.webp" role="img" aria-label="La tua città" preserveAspectRatio="xMidYMid slice" focusable="false"><title>La tua città</title></img>
         <h2>La tua città</h2>
         <p>Selezionando questo pulsante otterrai il meteo per la tua località attuale</p>
-        <p><a class="btn btn-secondary" href="/city">Il meteo nella tua città &raquo;</a></p>
+        <p><a class="btn btn-secondary your-city">Il meteo nella tua città &raquo;</a></p>
       </div>
       <div class="col-lg-4">
         <img class="rounded-circle" width="140" height="140" src="img/Homepage/tokyo.webp" role="img" aria-label="La tua città" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Le tue città</title></img>
@@ -137,7 +140,7 @@
         <img class="rounded-circle" width="140" height="140" src="img/Homepage/map.webp" role="img" aria-label="La tua città" preserveAspectRatio="xMidYMid slice" focusable="false"><title>La mappa</title></img>
         <h2>La mappa</h2>
         <p>Qua potrai vedere la mappa del mondo e selezionare una città della quale conoscere il meteo</p>
-        <p><a class="btn btn-secondary" href="/map">Vediamo la mappa &raquo;</a></p>
+        <p><a class="btn btn-secondary map">Vediamo la mappa &raquo;</a></p>
       </div>
     </div>
   </div>

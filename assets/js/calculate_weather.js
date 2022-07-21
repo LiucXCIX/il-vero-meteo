@@ -96,7 +96,40 @@ async function setWeatherForAllCities(){
 }
 
 
+function createCardsForCities(listSearchedCities) {
+    let cardToSet = document.getElementsByClassName("card-city-unset")
+    for (let i = 0; i < listSearchedCities.length && i < cardToSet.length; i++) {
+        let card = cardToSet[i]
+        let cityName = listSearchedCities[i]
+        console.log({card})
+        card.classList.add("card-city-set")
+        card.getElementsByTagName('img')[0].setAttribute("data-src", `/city_photo/${cityName}`)
+        card.getElementsByTagName('img')[0].setAttribute("alt", `Foto scattata a ${cityName}`)
+        card.getElementsByClassName('description-city')[0].innerText = `${cityName}`
+        card.getElementsByClassName('what-weather-in-city')[0].setAttribute('id', `what-weather-in-${cityName}`)
+        card.getElementsByClassName('weather-city')[0].setAttribute('id', `weather-${cityName}`)
+        card.getElementsByClassName('temp-city')[0].setAttribute('id', `temp-${cityName}`)
+    }
+}
+
+
+function removeUnsetCardCities(){
+    let cardsToRemove = document.getElementsByClassName("col")
+    for (let i = cardsToRemove.length - 1; i >= 0; i--) {
+        if (!cardsToRemove[i].children[0].classList.contains("card-city-set")) {
+            cardsToRemove[i].remove()
+        }
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
+    let prevSearchedCities = localStorage.getItem("ilverometeoSearchedCities")
+    if (prevSearchedCities != null) {
+        let listSearchedCities = JSON.parse(prevSearchedCities)
+        createCardsForCities(listSearchedCities)
+    }
+    removeUnsetCardCities()
     let weatherButtonCities = document.getElementsByClassName("what-weather-in-city")
     for (let i = 0; i < weatherButtonCities.length; i++) {
         if (weatherButtonCities[i].id == "") continue;

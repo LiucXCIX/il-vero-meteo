@@ -50,6 +50,11 @@ app.get('/cities', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/cities.html'));
 });
 
+app.get('/map', function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/map.html'));
+});
+
+
 app.get('/city_info/:city_name', function (req, res) {
     let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}`;
     axios.get(fullUrl)

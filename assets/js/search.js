@@ -49,10 +49,27 @@ function getCurrentLocation() {
     }
 }
 
+/**
+ * If the browser supports geolocation, get the current position and call the getCityPageByCoords
+ * function, otherwise show an error message
+ */
+ function getCurrentMapLocation() {
+    if (sessionStorage.getItem("user_locationilverometeo.it") == null){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getCityPageByCoords, showError);
+        } else {
+            alert("La geolocalizzazione non è supportata da questo browser.");
+        }
+    } else {
+        window.location.href = `/map`
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     search = document.getElementById("search-city")
     search_button = document.getElementById("search-button")
-    cityButton = document.getElementById("your-city")
+    cityButton = document.getElementsByClassName("your-city")
+    mapButton = document.getElementsByClassName("map")
     search.addEventListener("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode == 13) {
@@ -62,7 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
     search_button.addEventListener('click', function() {
         getCityPage(search.value)
     })
-    cityButton.addEventListener('click', function() {
-        getCurrentLocation()
-    })
+    for (let btt of cityButton){
+        btt.addEventListener('click', function() {
+            getCurrentLocation()
+        })
+    }
+    for (let btt of mapButton){
+        btt.addEventListener('click', function() {
+            getCurrentMapLocation()
+        })
+    }
 })

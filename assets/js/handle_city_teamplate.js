@@ -40,6 +40,17 @@ function getImages() {
     })
 }
 
+/**
+ * It creates a map, adds a marker to it, and adds a click listener to the map that displays a popup
+ * with the weather data of the clicked location
+ * @param lat - latitude
+ * @param lon - longitude
+ * @param cityName - The name of the city
+ * @param countryName - The name of the country
+ * @param weatherDescription - The weather description, e.g. "clear sky"
+ * @param weatherIconId - The weather icon ID from the OpenWeatherMap API.
+ * @param temp - temperature in Celsius
+ */
 function handleMap(lat, lon, cityName, countryName, weatherDescription, weatherIconId, temp) {
     var map = L.map('map').setView([lat , lon], 17);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -59,6 +70,11 @@ function handleMap(lat, lon, cityName, countryName, weatherDescription, weatherI
     map.on('click', async function(event) {onMapClick(event)});
 }
 
+/**
+ * It converts seconds to hours, minutes, and seconds.
+ * @param sec_num - The number of seconds to convert to HH:MM:SS format.
+ * @returns the hours, minutes, and seconds of the time.
+ */
 function toHHMMSS(sec_num) {
     let hours   = Math.floor(sec_num / 3600);
     let minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -78,7 +94,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         window.location.href = `/`
     }
     // get l'array in localstorge se è undefined inseriscine uno nuovo, se no vai a appendere il cityName nuovo alla lista
-    localStorage.setItem("ilverometeoRequestedCities", )
+    let prevSearchedCities = localStorage.getItem("ilverometeoSearchedCities")
+    if (prevSearchedCities == null) {
+        localStorage.setItem("ilverometeoSearchedCities", JSON.stringify([cityName]))
+    } else {
+        listSearchedCities = JSON.parse(prevSearchedCities)
+        if (listSearchedCities.length > 8) {
+            listSearchedCities.shift()
+        }
+        if (!listSearchedCities.includes(cityName)) listSearchedCities.push(cityName)
+        localStorage.setItem("ilverometeoSearchedCities", JSON.stringify(listSearchedCities))
+    }
     let weatherCity = await getWeather(position[0].lat, position[0].lon);
     document.getElementById("country").innerText = weatherCity.sys.country
     document.getElementById("time").innerText = toHHMMSS(weatherCity.dt + weatherCity.timezone)

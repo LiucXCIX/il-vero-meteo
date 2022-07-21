@@ -12,8 +12,8 @@
     <link href="bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/toggle-bootstrap-dark.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/toggle-bootstrap-print.min.css" />
-    <script defer src = "/js/calculate_weather.js"></script>
     <script defer src = "/js/preferences.js"></script>
+    <script defer src = "/js/calculate_weather.js"></script>
     <script defer src = "/js/search.js"></script>
     <style>
       .bd-placeholder-img {
@@ -38,20 +38,23 @@
   <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/index">ilverometeo.it</a>
+        <a class="navbar-brand" href="/">ilverometeo.it</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link" href="/index">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id = "your-city">La tua città</a>
+              <a class="nav-link your-city">La tua città</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Tutte le tue città</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link map">La mappa</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" class="btn btn-info" role="button" id = "turnOnOffDarkMode">Dark mode</a>
@@ -79,7 +82,7 @@
         <p class="lead text-muted">Queste sono le città che ti piacciono così tanto da averci già chiesto "Che tempo fa?" in passato</p>
         <p>
           <a href="#" class="btn btn-primary my-2" id = "weather-all">Che tempo fa in tutte le città?</a>
-          <a href="/index" class="btn btn-secondary my-2">Torna alla homepage</a>
+          <a href="/" class="btn btn-secondary my-2">Torna alla homepage</a>
         </p>
       </div>
     </div>
@@ -90,7 +93,7 @@
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm card-city-set">
             <img class=card-img-top" width="100%" height="225" data-src="/city_photo/Milan" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Milano</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
             <div class="card-body">
               <p class="card-text" class = "description-city"> Milano, il capoluogo lombardo, ha una popolazione di circa 1.3 milioni di abitanti. Con i suoi diversi settori industriali, Milano è la principale città industriale in Italia. Milano è come una calamita per designers, artisti, fotografi e modelle. Milano inoltre ha un bellissimo ed antichissimo centro storico costellato da palazzi e monumenti, motivo che spinge ogni giorno milioni di visitatori da ogni parte del mondo a visitare la città del fascino.</p>
@@ -105,12 +108,12 @@
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm card-city-set">
             <img class=card-img-top" width="100%" height="225" data-src="/city_photo/pietrasanta" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Pietrasanta</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
 
             <div class="card-body">
               <p class="card-text" class = "description-city">
-                Pietrasanta è un comune italiano di 23 071 abitanti della provincia di Lucca in Toscana.
+                Pietrasanta è un comune italiano di 23 071 abitanti della provincia di Lucca in Toscana. Le numerose occasioni di mostre di pittura e scultura via via presentate nella città, nei suoi spazi pubblici e nelle numerose gallerie d'arte, hanno contribuito a lasciarle un patrimonio artistico pubblico in continua crescita, raccolto nelle Collezioni comunali. Oltre ai numerosi laboratori artigianali, Pietrasanta ha sparse sul territorio numerose gallerie d'arte, nel numero record di una ogni 1200 abitanti circa.
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -123,7 +126,7 @@
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm card-city-set">
             <img class=card-img-top" width="100%" height="225" data-src="/city_photo/tokyo" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
 
             <div class="card-body">
@@ -140,11 +143,11 @@
         </div>
 
         <div class="col">
-          <div class="card shadow-sm">
-            <img class=card-img-top" width="100%" height="225" src="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
 
             <div class="card-body">
-              <p class="card-text" class = "description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
@@ -156,11 +159,11 @@
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
-            <img class=card-img-top" width="100%" height="225" src="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
 
             <div class="card-body">
-              <p class="card-text" class = "description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
@@ -172,11 +175,11 @@
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
-            <img class=card-img-top" width="100%" height="225" src="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
 
             <div class="card-body">
-              <p class="card-text" class = "description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
@@ -189,11 +192,11 @@
         </div>
 
         <div class="col">
-          <div class="card shadow-sm">
-            <img class=card-img-top" width="100%" height="225" src="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
 
             <div class="card-body">
-              <p class="card-text" class = "description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
@@ -205,11 +208,11 @@
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
-            <img class=card-img-top" width="100%" height="225" src="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
 
             <div class="card-body">
-              <p class="card-text" class = "description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
@@ -221,11 +224,59 @@
           </div>
         </div>
         <div class="col">
-          <div class="card shadow-sm">
-            <img class=card-img-top" width="100%" height="225" src="" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>City</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
 
             <div class="card-body">
-              <p class="card-text" class = "description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
+                </div>
+                <i class="wi weather-city"></i>
+                <small class = "temp-city"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+
+            <div class="card-body">
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
+                </div>
+                <i class="wi weather-city"></i>
+                <small class = "temp-city"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+
+            <div class="card-body">
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
+                </div>
+                <i class="wi weather-city"></i>
+                <small class = "temp-city"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm card-city-unset">
+            <img class=card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+
+            <div class="card-body">
+              <p class="card-text description-city">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-primary what-weather-in-city">Che tempo fa?</button>
@@ -242,14 +293,9 @@
 
 </main>
 
-<footer class="text-muted py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-    <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
-  </div>
+<footer class="container">
+  <p class="float-end"><a href="#">Torna indietro</a></p>
+  <p>&copy; 2022-2022 Il vero meteo. &middot; <a href="#">Privacy</a> &middot; <a href="#">Termini e condizioni</a></p>
 </footer>
 
 

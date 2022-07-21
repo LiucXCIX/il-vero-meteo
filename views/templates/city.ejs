@@ -17,28 +17,31 @@
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
     integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
     crossorigin=""></script>
-    <script defer src ="/js/handle_city_teamplate.js"></script>
     <script defer src ="/js/preferences.js"></script>
+    <script defer src ="/js/handle_city_teamplate.js"></script>
     <script defer src = "/js/search.js"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
           <div class="container-fluid">
-            <a class="navbar-brand" href="/index">ilverometeo.it</a>
+            <a class="navbar-brand" href="/">ilverometeo.it</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                  <a class="nav-link" href="/index">Home</a>
+                  <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" id = "your-city" aria-current="page"><%=city_name%></a>
+                  <a class="nav-link active your-city" aria-current="page"><%=city_name%></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/cities">Tutte le tue città</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link map">La mappa</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" class="btn btn-info" role="button" id = "turnOnOffDarkMode">Dark mode</a>
@@ -62,7 +65,7 @@
       <div class="container-xxl flex-grow-1 container-p-y mb-4">
         <div class="row">
           <div class="mb-2 order-0">
-            <div class="card rounded-elem">
+            <div class="card rounded-elem shadow-sm">
               <div class="d-flex align-items-end row">
                 <div class="mb-2 col-sm-7">
                   <div class="card-body">
@@ -88,7 +91,7 @@
         </div>
         <div class="row">
           <div class="mb-2 order-0">
-            <div class="card rounded-elem">
+            <div class="card rounded-elem shadow-sm">
               <div class="d-flex align-items-end row">
                 <div class="mb-2 col-sm-5">
                   <div class="card-body">
@@ -117,7 +120,7 @@
         </div>
         <div class = "row mb-2">
           <div class = "mb-2 order-0">
-            <div class = "card rounded_elem">
+            <div class = "card rounded_elem shadow-sm">
               <div id="map"> </div>
           </div>
         </div>
