@@ -36,6 +36,26 @@ async function getInfoCity(cityName) {
     return jsonObj;
 }
 
+// async function getImageWW(imgUrl) {
+//     const response = await fetch(imgUrl)
+//     let jsonObj = await response.json()
+//     const imageElement = document.querySelector(`img[data-src='${imgUrl}']`)
+//     const objectURL = jsonObj.urls.regular 
+//     imageElement.setAttribute('src', objectURL)
+//     imageElement.removeAttribute('data-src')
+// }
+// 
+// async function getImagesWithoutWorker() {
+// 
+//     let promises = []
+//     const imgElements = document.querySelectorAll('img[data-src]')
+// 
+//     for (let imgElement of imgElements) {
+//         promises.push(getImageWW(imgElement.getAttribute('data-src')))
+//     }
+// 
+//     await Promise.all(promises)
+// }
 
 function getImages() {
     const ImageLoaderWorker = new Worker('js/image_worker.js')
@@ -101,7 +121,6 @@ function createCardsForCities(listSearchedCities) {
     for (let i = 0; i < listSearchedCities.length && i < cardToSet.length; i++) {
         let card = cardToSet[i]
         let cityName = listSearchedCities[i]
-        console.log({card})
         card.classList.add("card-city-set")
         card.getElementsByTagName('img')[0].setAttribute("data-src", `/city_photo/${cityName}`)
         card.getElementsByTagName('img')[0].setAttribute("alt", `Foto scattata a ${cityName}`)
@@ -127,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let prevSearchedCities = localStorage.getItem("ilverometeoSearchedCities")
     if (prevSearchedCities != null) {
         let listSearchedCities = JSON.parse(prevSearchedCities)
-        createCardsForCities(listSearchedCities)
+        createCardsForCities(listSearchedCities.cityNames)
     }
     removeUnsetCardCities()
     let weatherButtonCities = document.getElementsByClassName("what-weather-in-city")
@@ -141,8 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("weather-all").addEventListener('click', async () => {
         await setWeatherForAllCities();
     });
-    (async () => {await setWeatherForAllCities()})()
+    (async () => {await setWeatherForAllCities()})();
     getImages()
+    // (async () => {await getImagesWithoutWorker()})();
     window.setInterval(async () => {await setWeatherForAllCities()}, (1000 * 60))
 });
 

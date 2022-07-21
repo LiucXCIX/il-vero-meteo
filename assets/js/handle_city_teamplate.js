@@ -93,17 +93,23 @@ document.addEventListener('DOMContentLoaded', async function() {
         alert(`Non è stato possibile ottenere il meteo per la città chiamata ${cityName}, verrai quindi riportato sulla homepage`)
         window.location.href = `/`
     }
-    // get l'array in localstorge se è undefined inseriscine uno nuovo, se no vai a appendere il cityName nuovo alla lista
+    // get l'array in localstorge se è undefined inseriscine uno nuovo, se no vai a appendere il cityName nuovo alla lista e controlla se il dato non è "scaduto"
     let prevSearchedCities = localStorage.getItem("ilverometeoSearchedCities")
+    let currentDate = new Date().getTime();
     if (prevSearchedCities == null) {
-        localStorage.setItem("ilverometeoSearchedCities", JSON.stringify([cityName]))
+        localStorage.setItem("ilverometeoSearchedCities", JSON.stringify({cityNames: [cityName], date: currentDate}))
     } else {
-        listSearchedCities = JSON.parse(prevSearchedCities)
-        if (listSearchedCities.length > 8) {
-            listSearchedCities.shift()
+        listSearchedCities = JSON.parse(prevSearchedCities).cityNames
+        const thirthyDaysInMilliseconds = 30 * 24 * 60 * 60 * 1000; 
+        if (currentDate - listSearchedCities.date > thirthyDaysInMilliseconds) {
+            localStorage.removeItem("ilverometeoSearchedCities");
+        } else {
+            if (listSearchedCities.length > 8) {
+                listSearchedCities.shift()
+            }
+            if (!listSearchedCities.includes(cityName)) listSearchedCities.push(cityName)
+            localStorage.setItem("ilverometeoSearchedCities", JSON.stringify({cityNames: listSearchedCities, date: currentDate}))
         }
-        if (!listSearchedCities.includes(cityName)) listSearchedCities.push(cityName)
-        localStorage.setItem("ilverometeoSearchedCities", JSON.stringify(listSearchedCities))
     }
     let weatherCity = await getWeather(position[0].lat, position[0].lon);
     document.getElementById("country").innerText = weatherCity.sys.country

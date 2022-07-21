@@ -4,6 +4,7 @@ const winston = require('winston');
 const path = require('path');
 const axios = require('axios');
 const favicon = require('serve-favicon');
+const compression = require('compression')
 
 require("dotenv").config();
 
@@ -12,7 +13,7 @@ const port = process.env.PORT || 8080;
 const weather_api_key = process.env.WEATHER_API_KEY
 const unsplash_access_key = process.env.UNSPLASH_ACCESS_KEY
 
-
+app.use(compression())
 app.use(favicon(path.join(__dirname, 'assets', 'img', 'Favicon', 'il-vero-meteo.ico')));
 app.use(express.static(__dirname + '/assets'));
 app.set("view engine", "ejs");
