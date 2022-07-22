@@ -17,7 +17,7 @@ function getImages() {
     ImageLoaderWorker.addEventListener('message', event => {
         const imageData = event.data
         const imageElement = document.querySelector(`img[data-src='${imageData.imageURL}']`)
-        const objectURL = imageData.res.urls.regular       
+        const objectURL = imageData.res.urls.small // successivamente metterei regular
         imageElement.setAttribute('src', objectURL)
         imageElement.removeAttribute('data-src')
     })

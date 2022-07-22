@@ -43,6 +43,7 @@ app.get('/city', function (req, res) {
 });
 
 app.get('/city/:city_name', function (req, res) {
+    // è migliorabile, potremmo inserire qua le richieste al api in modo tale da avere un inferiore delay nella creazione della pagina
     console.log(req.params.city_name, __dirname)
     res.render("templates/city", {
         city_name: req.params.city_name.charAt(0).toUpperCase() + req.params.city_name.slice(1),

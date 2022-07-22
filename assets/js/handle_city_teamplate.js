@@ -22,6 +22,7 @@
     return jsonObj;
 }
 
+
 function getImages() {
     const ImageLoaderWorker = new Worker('../js/image_worker.js')
     const imgElements = document.querySelectorAll('img[data-src]')

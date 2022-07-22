@@ -47,10 +47,39 @@ document.addEventListener('DOMContentLoaded', (e) => {
             document.getElementById("turnOnOffDarkMode").classList.add("active")
         }
     }
-
+    let body = document.getElementsByTagName("body")
+    if (body[0].classList.contains("bootstrap-dark")) {
+        var head = document.getElementsByTagName('HEAD')[0];
+        // Create new link Element
+        var link = document.createElement('link');
+        // set the attributes for link element
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/toggle-bootstrap-dark.min.css';
+        head.appendChild(link);
+        link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/toggle-bootstrap-print.min.css';
+        head.appendChild(link);
+    }
     document.getElementById("turnOnOffDarkMode").addEventListener('click', function() {
         let body = document.getElementsByTagName("body")
         if (body[0].classList.contains("bootstrap")) {
+            // Get HTML head element
+            var head = document.getElementsByTagName('HEAD')[0];
+            // Create new link Element
+            var link = document.createElement('link');
+            // set the attributes for link element
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/toggle-bootstrap-dark.min.css';
+            head.appendChild(link);
+            link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/toggle-bootstrap-print.min.css';
+            head.appendChild(link);
             switchDarkMode()
             document.getElementById("turnOnOffDarkMode").classList.add("active")
         } else {
