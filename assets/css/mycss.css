@@ -1,5 +1,9 @@
 .black-shadow-text {
-    text-shadow: 1px 1px #000000;
+    text-shadow:
+        -0.03em 0 black,
+        0 -0.03em black,
+        0.03em 0 black,
+        0 0.03em black;
 }
 
 .rounded-elem {
