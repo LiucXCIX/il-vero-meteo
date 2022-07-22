@@ -116,6 +116,10 @@ async function setWeatherForAllCities(){
 }
 
 
+/**
+ * It takes a list of cities and creates a card for each of them
+ * @param listSearchedCities - the list of cities that the user has searched for
+ */
 function createCardsForCities(listSearchedCities) {
     let cardToSet = document.getElementsByClassName("card-city-unset")
     for (let i = 0; i < listSearchedCities.length && i < cardToSet.length; i++) {
@@ -132,6 +136,9 @@ function createCardsForCities(listSearchedCities) {
 }
 
 
+/**
+ * It removes all the cards that don't have the class "card-city-set" which means that they are unset
+ */
 function removeUnsetCardCities(){
     let cardsToRemove = document.getElementsByClassName("col")
     for (let i = cardsToRemove.length - 1; i >= 0; i--) {
