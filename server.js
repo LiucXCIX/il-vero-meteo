@@ -28,6 +28,8 @@ app.use(expressWinston.logger({
     )
 }));
 
+// MAIN ROUTES
+
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/index.html'));
 });
@@ -55,6 +57,7 @@ app.get('/map', function (req, res) {
     res.sendFile(path.join(__dirname, '/views/map.html'));
 });
 
+// API ROUTES
 
 app.get('/city_info/:city_name', function (req, res) {
     let fullUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${req.params.city_name}&appid=${weather_api_key}`;
@@ -69,8 +72,13 @@ app.get('/city_info/:city_name', function (req, res) {
 
 app.get('/city_photo/:city_name', function (req, res) {
     let fullUrl = `https://api.unsplash.com/photos/random/?client_id=${unsplash_access_key}&query=${req.params.city_name}&orientation=landscape`;
-    const request = require('request')
-    request(fullUrl).pipe(res);
+    axios.get(fullUrl)
+    .then(json => {
+        res.json(json.data)
+    })
+    .catch(error => {
+        return res.status(500).json(error);
+    })
 });
 
 app.get('/weather_info', function (req, res) {
