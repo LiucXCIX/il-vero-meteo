@@ -7,3 +7,7 @@
 }
 
 #map { height: 540px; }
+
+.car-img {
+    object-fit: cover;
+}
