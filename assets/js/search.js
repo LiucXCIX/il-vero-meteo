@@ -3,7 +3,6 @@ function getCityPage(cityName) {
 }
 
 function getCityPageByCoords(position) {
-    console.log({position})
     let location = {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
@@ -13,7 +12,6 @@ function getCityPageByCoords(position) {
 }
 
 function getMapPageByCoords(position) {
-    console.log({position})
     let location = {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
