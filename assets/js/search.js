@@ -3,6 +3,7 @@ function getCityPage(cityName) {
 }
 
 function getCityPageByCoords(position) {
+    console.log({position})
     let location = {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
@@ -11,26 +12,46 @@ function getCityPageByCoords(position) {
     window.location.href = `/city`
 }
 
+function getMapPageByCoords(position) {
+    console.log({position})
+    let location = {
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+    };
+    sessionStorage.setItem("user_locationilverometeo.it", JSON.stringify(location))
+    window.location.href = `/map`
+}
+
 /**
  * If the user denies the request for geolocation, or if the request fails for any reason, the function
  * will display an alert box with a message explaining what went wrong
  * @param error - The error object returned by the geolocation API.
  */
-function showError(error) {
-    switch(error.code) {
-      case error.PERMISSION_DENIED:
-        alert("Non è stato possibile ottenere la tua posizione")
-        break;
-      case error.POSITION_UNAVAILABLE:
-        alert("La tua posizione al momento non è disponibile.")
-        break;
-      case error.TIMEOUT:
-        alert("La richiesta per ottenere la tua posizione è andata in time out.")
-        break;
-      case error.UNKNOWN_ERROR:
-        alert("Un errore sconosciuto è accaduto.")
-        break;
+function showErrorMap(error) {
+    let pos = {
+        coords: {
+            latitude: 41.8902,
+            longitude: 12.4922,
+        }
     }
+    alert("Non è stato possibile rivelare la tua posizione. Beccati 'sto Colosseo in faccia, tiè!")
+    getMapPageByCoords(pos)
+}
+
+/**
+ * If the user denies the request for geolocation, or if the request fails for any reason, the function
+ * will display an alert box with a message explaining what went wrong
+ * @param error - The error object returned by the geolocation API.
+ */
+ function showErrorCity(error) {
+    let pos = {
+        coords: {
+            latitude: 41.8902,
+            longitude: 12.4922,
+        }
+    }
+    alert("Non è stato possibile rivelare la tua posizione. Beccati 'sto Colosseo in faccia, tiè!")
+    getCityPageByCoords(pos)
 }
 
 /**
@@ -40,7 +61,7 @@ function showError(error) {
 function getCurrentLocation() {
     if (sessionStorage.getItem("user_locationilverometeo.it") == null){
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getCityPageByCoords, showError);
+            navigator.geolocation.getCurrentPosition(getCityPageByCoords, showErrorCity);
         } else {
             alert("La geolocalizzazione non è supportata da questo browser.");
         }
@@ -56,7 +77,7 @@ function getCurrentLocation() {
  function getCurrentMapLocation() {
     if (sessionStorage.getItem("user_locationilverometeo.it") == null){
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getCityPageByCoords, showError);
+            navigator.geolocation.getCurrentPosition(getMapPageByCoords, showErrorMap);
         } else {
             alert("La geolocalizzazione non è supportata da questo browser.");
         }
